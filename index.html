@@ -2,69 +2,70 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Golden Bot v3.0 Command Center</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Bot v3.2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#050816">
 <style>
 :root{
   --bg:#050816; --card:#0a1122cc; --accent:#00f5ff; --accent2:#7c3aed; --text:#e5e7eb; --muted:#94a3b8;
-  --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; --radius:16px;
+  --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; --radius:18px;
 }
-*{box-sizing:border-box;font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent;}
-body{background:radial-gradient(1200px 800px at 80% -10%, #7c3aed22, transparent), radial-gradient(800px 600px at 0% 100%, #00f5ff11, transparent), var(--bg); color:var(--text); margin:0; padding:16px; min-height:100vh;}
-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-header h1{font-size:20px;margin:0;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.logo{width:36px;height:36px}
+*{box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent;}
+body{background:radial-gradient(800px 600px at 50% -20%, #7c3aed33, transparent), radial-gradient(600px 400px at 100% 100%, #00f5ff22, transparent), var(--bg); color:var(--text); margin:0; padding:14px; min-height:100vh;}
+header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-top:8px}
+header h1{font-size:18px;margin:0;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo{width:32px;height:32px}
 
-.card{background:var(--card);backdrop-filter:blur(12px);border:1px solid #1e293b; border-radius:var(--radius);padding:16px;margin-bottom:16px;box-shadow:0 0 0 1px #ffffff05}
-.card h3{margin:0 0 12px;font-size:15px;display:flex;align-items:center;gap:8px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)} .grid-2{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--card);backdrop-filter:blur(16px);border:1px solid #1e293b; border-radius:var(--radius);padding:14px;margin-bottom:14px;box-shadow:0 4px 30px #00030}
+.card h3{margin:0 0 10px;font-size:14px;display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:600}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
 
-input,textarea,button,select{width:100%;padding:12px;border-radius:12px;border:1px solid #233044;background:#0b1220;color:#fff;font-size:14px;margin-top:6px;outline:none;transition:.2s}
+input,textarea,button{width:100%;padding:14px;border-radius:14px;border:1px solid #233044;background:#0b1220;color:#fff;font-size:15px;margin-top:6px;outline:none;transition:.2s}
 input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px #00f5ff22}
-button{background:linear-gradient(90deg,var(--accent2),var(--accent));border:none;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-button:active{transform:scale(.98)}
+button{background:linear-gradient(90deg,var(--accent2),var(--accent));border:none;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.5;cursor:not-allowed}
 .btn-secondary{background:#1e293b;border:1px solid #334155}
-.btn-danger{background:linear-gradient(90deg,#ef4444,#f87171)}
+.btn-small{padding:10px 12px;font-size:13px}
 .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:20px;background:#0b1220;border:1px solid #233044;margin:4px 4px 0 0;font-size:12px}
-.logs,.chat{height:300px;overflow:auto;background:#03060e;border:1px solid #1e293b;padding:12px;border-radius:12px;font-size:13px}
-.msg-user{background:#1e3a8a30;border-left:3px solid var(--accent);padding:10px;border-radius:8px;margin:6px 0}
-.msg-bot{background:#1f293730;border-left:3px solid var(--accent2);padding:10px;border-radius:8px;margin:6px 0}
-.captcha-img{max-width:100%;border:1px solid #334155;border-radius:12px}
-.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-@media(min-width:600px){.tool-grid{grid-template-columns:repeat(3,1fr)}}
+.logs,.chat{height:320px;overflow:auto;background:#03060e;border:1px solid #1e293b;padding:12px;border-radius:14px;font-size:13px}
+.msg-user{background:#1e3a8a30;border-left:3px solid var(--accent);padding:10px;border-radius:10px;margin:6px 0}
+.msg-bot{background:#1f293730;border-left:3px solid var(--accent2);padding:10px;border-radius:10px;margin:6px 0}
+.captcha-img{max-width:100%;border:1px solid #334155;border-radius:14px}
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .icon{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
-.secret-box{display:none}
+
+/* LOADING ANIMATION */
+.loader{width:24px;height:24px;border:3px solid #233044;border-top:3px solid var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.processing{display:flex;align-items:center;gap:8px;color:var(--accent)}
 </style>
 </head>
 <body>
 <header>
 <svg class="logo" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="url(#g)" stroke-width="1.5" fill="none"/><defs><linearGradient id="g"><stop offset="0" stop-color="#00f5ff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg>
-<h1>Golden Bot v3.0 Command Center</h1>
+<h1>Golden Bot v3.2</h1>
 </header>
 
 <div class="card">
   <h3><svg class="icon"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Connection</h3>
-  <div class="grid grid-2">
-    <input id="botUrl" placeholder="Bot Server URL" value="https://golden-bot.onrender.com">
-    <input id="secret" class="secret-box" placeholder="ADMIN_SECRET_HASH" type="password">
-  </div>
   <button onclick="checkHealth()"><svg class="icon"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Connect</button>
   <div id="status" style="margin-top:10px"></div>
 </div>
 
-<div class="grid grid-3">
-  <div class="card"><h3><svg class="icon"><path d="M9 12l2 2 4-4"/></svg>System Health</h3><div id="health"><span class="pill">Not connected</span></div></div>
-  <div class="card"><h3><svg class="icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/></svg>Profile</h3>
-    <input id="profileId" value="sb1">
-    <button class="btn-secondary" onclick="rotateProfile()">Rotate UA</button>
-  </div>
-  <div class="card"><h3><svg class="icon"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Quick Actions</h3>
-    <div class="tool-grid">
-      <button class="btn-secondary" onclick="quick('checkUnits')">Units</button>
-      <button class="btn-secondary" onclick="quick('swagbucksCheck')">SB</button>
-      <button class="btn-secondary" onclick="quick('timebucksFarm')">TB</button>
-    </div>
+<div class="card"><h3><svg class="icon"><path d="M9 12l2 2 4-4"/></svg>System Health</h3><div id="health"><span class="pill">Not connected</span></div></div>
+
+<div class="card"><h3><svg class="icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/></svg>Profile</h3>
+  <input id="profileId" placeholder="Profile ID">
+  <input id="userId" placeholder="User ID">
+  <button class="btn-secondary btn-small" onclick="rotateProfile()">Rotate UA</button>
+</div>
+
+<div class="card"><h3><svg class="icon"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Quick Actions</h3>
+  <div class="tool-grid">
+    <button class="btn-secondary btn-small" onclick="quick('checkUnits')">Units</button>
+    <button class="btn-secondary btn-small" onclick="quick('swagbucksCheck')">SB</button>
+    <button class="btn-secondary btn-small" onclick="quick('timebucksFarm')">TB</button>
   </div>
 </div>
 
@@ -72,35 +73,23 @@ button:active{transform:scale(.98)}
   <h3><svg class="icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> AI Command Chat</h3>
   <div class="chat" id="chat"></div>
   <textarea id="command" rows="2" placeholder="With profile sb1 smartLogin to https://swagbucks.com/login email: a@b.com password: 123"></textarea>
-  <div class="grid grid-2">
-    <input id="userId" value="admin" placeholder="User ID">
-    <button onclick="runCommand()">Send</button>
-  </div>
+  <button id="sendBtn" onclick="runCommand()">Send Command</button>
 </div>
 
 <div class="card">
   <h3><svg class="icon"><path d="M4 6h16M4 12h16M4 18h7"/></svg> 1-Click Tools</h3>
-  <div class="grid grid-3">
-    <div>
-      <h4 style="margin:0 0 8px;color:var(--muted)">Browser</h4>
-      <input id="url" placeholder="https://example.com">
-      <button onclick="tool('extractPageText')">Extract Text</button>
-      <button class="btn-secondary" onclick="tool('takeScreenshot')">Screenshot</button>
-      <button class="btn-secondary" onclick="tool('extractAllLinks')">Get Links</button>
-    </div>
-    <div>
-      <h4 style="margin:0 0 8px;color:var(--muted)">Social</h4>
-      <textarea id="postText" rows="3" placeholder="Post text"></textarea>
-      <button onclick="tool('postToX')">Post to X</button>
-      <button class="btn-secondary" onclick="tool('postToLinkedIn')">Post to LinkedIn</button>
-    </div>
-    <div>
-      <h4 style="margin:0 0 8px;color:var(--muted)">Marketing</h4>
-      <input id="website" placeholder="https://targetsite.com">
-      <textarea id="pitch" rows="2" placeholder="Pitch"></textarea>
-      <button onclick="tool('findContactAndPitch')">Find Email</button>
-      <button class="btn-secondary" onclick="tool('findDealsAndCodes')">Promo Codes</button>
-    </div>
+  <h4 style="margin:8px 0 6px;color:var(--muted);font-size:13px">Browser</h4>
+  <input id="url" placeholder="https://example.com">
+  <div class="grid">
+    <button class="btn-secondary btn-small" onclick="tool('extractPageText')">Extract Text</button>
+    <button class="btn-secondary btn-small" onclick="tool('takeScreenshot')">Screenshot</button>
+    <button class="btn-secondary btn-small" onclick="tool('extractAllLinks')">Get Links</button>
+  </div>
+  <h4 style="margin:12px 0 6px;color:var(--muted);font-size:13px">Social</h4>
+  <textarea id="postText" rows="2" placeholder="Post text"></textarea>
+  <div class="grid">
+    <button class="btn-secondary btn-small" onclick="tool('postToX')">Post to X</button>
+    <button class="btn-secondary btn-small" onclick="tool('postToLinkedIn')">Post to LinkedIn</button>
   </div>
 </div>
 
@@ -118,23 +107,44 @@ button:active{transform:scale(.98)}
   <div id="captchaArea" style="margin-top:12px"></div>
 </div>
 
-<div class="card">
-  <h3><svg class="icon"><path d="M3 3v18h18"/></svg> Audit Logs</h3>
-  <button class="btn-secondary" onclick="loadLogs()">Load Last 20</button>
-  <div class="logs" id="logs"></div>
-</div>
-
 <script>
-const SECRET = "GDBT-7K9P-2Q4R-X8Z1"; 
-let BOT_URL = "", CHAT = [];
-window.onload = () => { document.getElementById('secret').value = SECRET; }
+// ===== CONFIG - CHANGE THESE 2 =====
+const BOT_URL = "https://golden-bot-backend.onrender.com"; 
+const SECRET = "GDBT-7K9P-2Q4R-X8Z1";
+// ===================================
+
+let CHAT = [];
+const LS_KEY = 'goldenbot_v32';
+
+// Load from LocalStorage
+function loadState(){
+  const data = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+  document.getElementById('profileId').value = data.profileId || 'sb1';
+  document.getElementById('userId').value = data.userId || 'admin';
+  CHAT = data.chat || [];
+  renderChat();
+}
+// Save to LocalStorage
+function saveState(){
+  const data = {
+    profileId: document.getElementById('profileId').value,
+    userId: document.getElementById('userId').value,
+    chat: CHAT.slice(-20) // only save last 20 messages
+  };
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+}
+
+function renderChat(){
+  document.getElementById('chat').innerHTML = CHAT.map(m => 
+    `<div class="${m.role==='user'?'msg-user':'msg-bot'}"><b>${m.role}:</b> <pre style="white-space:pre-wrap;margin:4px 0 0;font-size:12px">${m.text}</pre></div>`
+  ).join('');
+  document.getElementById('chat').scrollTop = 99999;
+}
 
 function addChat(role, text){
   CHAT.push({role, text});
-  document.getElementById('chat').innerHTML = CHAT.map(m => 
-    `<div class="${m.role==='user'?'msg-user':'msg-bot'}"><b>${m.role}:</b> <pre style="white-space:pre-wrap;margin:4px 0 0">${m.text}</pre></div>`
-  ).join('');
-  document.getElementById('chat').scrollTop = 99999;
+  renderChat();
+  saveState();
 }
 
 async function api(path, body){
@@ -146,12 +156,12 @@ async function api(path, body){
 }
 
 async function checkHealth(){
-  BOT_URL = document.getElementById('botUrl').value;
+  document.getElementById('status').innerHTML = `<div class="processing"><div class="loader"></div>Connecting...</div>`;
   try{
     const res = await fetch(`${BOT_URL}/health?secret=${SECRET}`);
     const d = await res.json();
     document.getElementById('health').innerHTML = `
-      <span class="pill"><svg class="icon" style="width:14px"><circle cx="12" cy="12" r="3"/></svg> Units: ${d.units}</span>
+      <span class="pill">Units: ${d.units}</span>
       <span class="pill">Acc ${d.account}</span>
       <span class="pill">AI $${d.dailyCost.toFixed(4)}</span>
       <span class="pill">Queue: ${d.queueLength}</span>
@@ -165,16 +175,23 @@ async function runCommand(){
   const cmd = document.getElementById('command').value;
   const userId = document.getElementById('userId').value;
   if(!cmd) return;
+  document.getElementById('sendBtn').disabled = true;
   addChat('user', cmd);
   document.getElementById('command').value = '';
+  addChat('bot', '<div class="processing"><div class="loader"></div>Processing...</div>');
+  saveState();
+  
   const r = await api('/run', {command:cmd, userId});
-  addChat('bot', 'Processing...');
-  setTimeout(async () => {
+  const poll = setInterval(async () => {
     const res = await fetch(`${BOT_URL}/result/${r.jobId}?secret=${SECRET}`);
     const data = await res.json();
-    CHAT.pop(); // remove processing
-    addChat('bot', JSON.stringify(data.result, null, 2));
-  }, 4000);
+    if(data.result !== "pending"){
+      clearInterval(poll);
+      CHAT.pop(); // remove processing
+      addChat('bot', JSON.stringify(data.result, null, 2));
+      document.getElementById('sendBtn').disabled = false;
+    }
+  }, 3000);
 }
 
 function quick(tool){
@@ -187,16 +204,12 @@ function tool(toolName){
   const profile = document.getElementById('profileId').value || 'sb1';
   const url = document.getElementById('url').value;
   const text = document.getElementById('postText').value;
-  const website = document.getElementById('website').value;
-  const pitch = document.getElementById('pitch').value;
   let cmd = `With profile ${profile} `;
   if(toolName==='extractPageText') cmd += `extractPageText ${url}`;
   if(toolName==='takeScreenshot') cmd += `takeScreenshot ${url}`;
   if(toolName==='extractAllLinks') cmd += `extractAllLinks ${url}`;
   if(toolName==='postToX') cmd += `postToX "${text}"`;
   if(toolName==='postToLinkedIn') cmd += `postToLinkedIn "${text}"`;
-  if(toolName==='findContactAndPitch') cmd += `findContactAndPitch ${website} "${pitch}"`;
-  if(toolName==='findDealsAndCodes') cmd += `findDealsAndCodes ${website}`;
   document.getElementById('command').value = cmd;
   runCommand();
 }
@@ -204,7 +217,7 @@ function tool(toolName){
 async function schedule(){
   const cmd = document.getElementById('scheduleCmd').value;
   const time = new Date(document.getElementById('scheduleTime').value).toISOString();
-  const r = await api('/schedule', {command:cmd, runAt:time, userId:"admin"});
+  await api('/schedule', {command:cmd, runAt:time, userId:document.getElementById('userId').value});
   document.getElementById('scheduleResult').innerHTML = `<span class="pill" style="color:var(--ok)">✓ Scheduled</span>`;
 }
 
@@ -213,10 +226,10 @@ async function loadCaptchas(){
   const c = await res.json();
   document.getElementById('captchaArea').innerHTML = c.map(x => `
     <div class="card" style="margin-top:10px">
-      <p style="font-size:12px;color:var(--muted)">Profile: ${x.profileId} | Job: ${x.job_id}</p>
+      <p style="font-size:12px;color:var(--muted)">Profile: ${x.profileId}</p>
       <img src="data:image/png;base64,${x.screenshot}" class="captcha-img">
       <input id="ans-${x.job_id}" placeholder="CLICK:#id or TYPE:ABC">
-      <button onclick="solve('${x.job_id}')">Submit Answer</button>
+      <button onclick="solve('${x.job_id}')">Submit</button>
     </div>
   `).join('') || "<span class='pill'>No pending captchas</span>";
 }
@@ -233,10 +246,14 @@ async function rotateProfile(){
   runCommand();
 }
 
-async function loadLogs(){
-  document.getElementById('logs').innerText = "Query: SELECT * FROM universal_audit_logs ORDER BY id DESC LIMIT 20";
-}
+// Save profile/userId on change
+document.getElementById('profileId').onchange = saveState;
+document.getElementById('userId').onchange = saveState;
 
+window.onload = () => {
+  loadState();
+  checkHealth(); // auto connect
+};
 setInterval(checkHealth, 20000);
 </script>
 </body>
