@@ -1,140 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GolViral Pro Sender</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GolViral - Kelvin 500/day Sender</title>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 <style>
-*{box-sizing:border-box}
-body{font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial;padding:0;margin:0;background:#0a0a0a;color:#fff}
-.container{max-width:500px;margin:auto;padding:20px}
-.header{text-align:center;padding:20px 0}
-.header h1{margin:0;font-size:24px}
-.header p{color:#888;font-size:13px}
-.card{background:#1a1a1a;border-radius:16px;padding:16px;margin:12px 0;border:1px solid #2a2a2a}
-label{font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:1px;display:block;margin:12px 0 6px}
-input,textarea{width:100%;padding:14px;background:#000;border:1px solid #333;border-radius:12px;color:#fff;font-size:14px;outline:none}
-textarea{resize:none}
-input:focus,textarea:focus{border-color:#25D366}
-.btn{width:100%;padding:16px;border:none;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;margin-top:12px}
-.btn-green{background:#25D366;color:#000}
-.btn-black{background:#fff;color:#000;margin-top:8px}
-.log{background:#000;border-radius:12px;padding:12px;height:200px;overflow:auto;font-family:monospace;font-size:12px;border:1px solid #222;margin-top:12px}
-.tabs{display:flex;background:#1a1a1a;border-radius:12px;padding:4px}
-.tabs button{flex:1;padding:10px;border:none;background:transparent;color:#888;border-radius:8px;font-weight:600}
-.tabs button.active{background:#fff;color:#000}
-.counter{font-size:11px;color:#25D366;margin-top:6px}
+body{font-family:system-ui;background:#0f172a;color:white;padding:20px}
+.card{background:white;color:#1e293b;padding:20px;border-radius:16px;max-width:600px;margin:auto}
+input,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box;margin-top:6px}
+button{width:100%;padding:15px;background:#4f46e5;color:white;border:none;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer}
+label{font-weight:600;font-size:13px}
+#log{margin-top:15px;background:#f8fafc;padding:12px;border-radius:8px;max-height:200px;overflow:auto;font-size:12px;font-family:monospace}
 </style>
 </head>
 <body>
-<div class="container">
-<div class="header">
-<h1>GolViral Sender Pro</h1>
-<p>Frontend Only • No Backend • Key Secured Inside</p>
-</div>
+<div class="card">
+<h2 style="margin-top:0;color:#4f46e5">GolViral Bulk Sender - 500/day</h2>
+<p style="font-size:12px;color:#64748b">Sender: Kelvinbackup89@gmail.com | Limit: 500/day free</p>
 
-<div class="tabs">
-<button id="tEmail" class="active" onclick="setMode('email')">EMAIL BULK</button>
-<button id="tSms" onclick="setMode('sms')">SMS PRO</button>
-</div>
+<label>App Password - ONLY PLACEHOLDER - Get from Google:</label>
+<input id="mypass" value="wcejmcyzhjvftzxw" placeholder="e.g. abcd efgh ijkl mnop -> paste without spaces">
 
-<div id="emailCard" class="card">
-<label>Your Gmail (FormSubmit)</label>
-<input id="myEmail" value="owlfitcat@sendapp.uk">
+<label style="margin-top:12px;display:block">Email Subject:</label>
+<input id="subj" value="GolViral Daily Earning Update">
 
-<label>Ad Subject</label>
-<input id="subject" value="GolViral Daily - Earn N500 Today!">
+<label style="margin-top:12px;display:block">Ad Message (This goes TO customer - Edit it):</label>
+<textarea id="ad" style="height:130px">Hello!
 
-<label>Edit Your Advertising Message</label>
-<textarea id="adMessage" rows="4">Hello Champion! 🔥
+This is GolViral Team. New tasks are live - Earn up to N500 per task.
 
-GolViral Daily Offer is LIVE.
-Earn N500 today — Limited slots!
+Watch Reels, Post Memes, Get paid via Bank & USDT.
 
-👉 Visit: https://golviral.com
-Reply STOP to unsubscribe.</textarea>
+Login now: https://your-golviral-link.com
 
-<label>Paste 85 Emails (one per line)</label>
-<textarea id="emails" rows="8" placeholder="customer1@gmail.com&#10;customer2@gmail.com&#10;...85 emails"></textarea>
-<div id="count" class="counter">0 emails detected</div>
-</div>
+Thanks!</textarea>
 
-<div id="smsCard" class="card" style="display:none">
-<label>Target Phone (e.g. 2348012345678)</label>
-<input id="phone" placeholder="234...">
+<label style="margin-top:12px;display:block">Paste 85 Emails - One per line:</label>
+<textarea id="emails" style="height:160px" placeholder="customer1@gmail.com
+customer2@gmail.com
+customer3@gmail.com"></textarea>
 
-<label>Edit SMS Advertising Message</label>
-<textarea id="smsAd" rows="3">GolViral: Earn N500 today! Visit golviral.com STOP to optout</textarea>
-<p style="font-size:11px;color:#666;margin-top:8px">Using your paid Textbelt key (hardcoded). 1 SMS = 1 credit.</p>
-</div>
+<button onclick="sendBulk()" id="btn" style="margin-top:15px">SEND TO ALL NOW - TO CUSTOMER</button>
 
-<button class="btn btn-green" onclick="sendNow()">🚀 SEND NOW</button>
-<button class="btn btn-black" onclick="clearLog()">Clear Log</button>
-
-<div id="log" class="log">Ready...<br>• Email mode = FormSubmit (free unlimited, no key)<br>• SMS mode = Textbelt (your paid key inside code)</div>
+<div id="log">Ready... Paste App Password first.</div>
+<p style="font-size:11px;color:#94a3b8;margin-top:10px">Textbelt SMS Key is already inside code: 2d395b21... (hardcoded)</p>
 </div>
 
 <script>
-// HARDCODED KEY - Do not share this file publicly
+const MY_GMAIL = "Kelvinbackup89@gmail.com";
 const TEXTBELT_KEY = "2d395b21149d9a0de4e27e36945a85609457cc4awsAnlwnEv2dfsVDHDsbEV5ixj";
 
-let mode='email';
-function setMode(m){
- mode=m;
- document.getElementById('emailCard').style.display=m=='email'?'block':'none';
- document.getElementById('smsCard').style.display=m=='sms'?'block':'none';
- document.getElementById('tEmail').className=m=='email'?'active':'';
- document.getElementById('tSms').className=m=='sms'?'active':'';
+function sendBulk(){
+  const mypass = document.getElementById('mypass').value.trim().replace(/\s/g,'');
+  const subj = document.getElementById('subj').value;
+  const ad = document.getElementById('ad').value;
+  const emails = document.getElementById('emails').value.split('\n').map(e=>e.trim()).filter(e=>e.includes('@'));
+  
+  if(mypass.includes('PASTE_YOUR') || mypass.length < 16){
+    alert('STOP: You must replace PASTE_YOUR_16_LETTERS_HERE_NO_SPACES with your real 16 letters from Google.\n\nLink: https://myaccount.google.com/apppasswords');
+    return;
+  }
+  if(emails.length==0){ alert('Paste at least 1 email'); return; }
+  
+  const btn = document.getElementById('btn');
+  const log = document.getElementById('log');
+  btn.disabled=true;
+  btn.textContent = `Sending 0/${emails.length}...`;
+  log.innerHTML = `Starting...<br>From: ${MY_GMAIL}<br>To: ${emails.length} customers<br><br>`;
+  
+  emails.forEach((to, i)=>{
+    setTimeout(()=>{
+      Email.send({
+        Host: "smtp.gmail.com",
+        Username: MY_GMAIL,
+        Password: mypass,
+        To: to,
+        From: MY_GMAIL,
+        Subject: subj,
+        Body: ad.replace(/\n/g, '<br>')
+      }).then(msg=>{
+        log.innerHTML += `${i+1}. ${to} -> ${msg}<br>`;
+        btn.textContent = `Sending ${i+1}/${emails.length}...`;
+        log.scrollTop = log.scrollHeight;
+        if(i==emails.length-1){
+          btn.disabled=false;
+          btn.textContent = `DONE - Sent ${emails.length} emails`;
+          alert(`Done! Sent to ${emails.length} customers.\n\nYou have ${500-emails.length} left today out of 500.`);
+        }
+      }).catch(e=>{
+        log.innerHTML += `${i+1}. ${to} -> FAILED: ${e}<br>`;
+      });
+    }, i*2500);
+  });
 }
-
-document.getElementById('emails').addEventListener('input',()=>{
- const list=document.getElementById('emails').value.split('\n').filter(e=>e.includes('@'));
- document.getElementById('count').innerText=`${list.length} emails detected`;
-});
-
-async function sendNow(){
- const log=document.getElementById('log');
- if(mode=='email'){
-   const myEmail=document.getElementById('myEmail').value.trim();
-   const subject=document.getElementById('subject').value.trim();
-   const msg=document.getElementById('adMessage').value.trim();
-   const emails=document.getElementById('emails').value.split('\n').map(e=>e.trim()).filter(e=>e.includes('@'));
-   if(!myEmail||!emails.length){alert('Enter Gmail and emails');return;}
-   log.innerHTML+=`<br>Starting EMAIL bulk to ${emails.length}...<br>`;
-   for(let i=0;i<emails.length;i++){
-     log.innerHTML+=`[${i+1}/${emails.length}] ${emails[i]}... `;
-     try{
-       await fetch(`https://formsubmit.co/${myEmail}`,{
-         method:'POST',
-         headers:{'Content-Type':'application/json','Accept':'application/json'},
-         body:JSON.stringify({email:emails[i],message:msg,_subject:subject,_captcha:'false',_template:'box'})
-       });
-       log.innerHTML+=`✅<br>`;
-     }catch(e){log.innerHTML+=`❌<br>`;}
-     await new Promise(r=>setTimeout(r,2000));
-     log.scrollTop=log.scrollHeight;
-   }
-   log.innerHTML+=`<br><b>Done! ${emails.length} emails sent.</b><br>`;
- }else{
-   const phone=document.getElementById('phone').value.trim();
-   const sms=document.getElementById('smsAd').value.trim();
-   if(!phone){alert('Enter phone');return;}
-   log.innerHTML+=`<br>Sending SMS to ${phone}...<br>`;
-   try{
-     const res=await fetch('https://textbelt.com/text',{
-       method:'POST',
-       headers:{'Content-Type':'application/json'},
-       body:JSON.stringify({phone:phone,message:sms,key:TEXTBELT_KEY})
-     });
-     const data=await res.json();
-     log.innerHTML+=`Response: ${JSON.stringify(data)}<br>`;
-     if(data.success) log.innerHTML+=`✅ SMS Delivered! ID: ${data.textId}<br>`;
-     else log.innerHTML+=`❌ Failed: ${data.error}<br>`;
-   }catch(e){log.innerHTML+=`❌ Error: ${e.message}<br>`;}
- }
-}
-
-function clearLog(){document.getElementById('log').innerHTML='Log cleared. Ready...<br>';}
 </script>
-</div>
 </body>
 </html>
