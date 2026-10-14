@@ -1,98 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GolViral - Kelvin 500/day Sender</title>
-<script src="https://smtpjs.com/v3/smtp.js"></script>
-<style>
-body{font-family:system-ui;background:#0f172a;color:white;padding:20px}
-.card{background:white;color:#1e293b;padding:20px;border-radius:16px;max-width:600px;margin:auto}
-input,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box;margin-top:6px}
-button{width:100%;padding:15px;background:#4f46e5;color:white;border:none;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer}
-label{font-weight:600;font-size:13px}
-#log{margin-top:15px;background:#f8fafc;padding:12px;border-radius:8px;max-height:200px;overflow:auto;font-size:12px;font-family:monospace}
-</style>
+<meta name="viewport" content="width=device-width">
+<title>GolViral Bulk Sender</title>
+<script src="https://cdn.jsdelivr.net/npm/smtpjs@1.0.1/smtp.min.js"></script>
 </head>
-<body>
-<div class="card">
-<h2 style="margin-top:0;color:#4f46e5">GolViral Bulk Sender - 500/day</h2>
-<p style="font-size:12px;color:#64748b">Sender: Kelvinbackup89@gmail.com | Limit: 500/day free</p>
+<body style="font-family:system-ui;padding:20px;background:#0f172a;color:white">
+<div style="background:white;color:#1e293b;padding:20px;border-radius:16px;max-width:600px;margin:auto">
+<h2 style="color:#4f46e5">GolViral Bulk Sender - 500/day</h2>
+<p>From: Kelvinbackup89@gmail.com</p>
 
-<label>App Password - ONLY PLACEHOLDER - Get from Google:</label>
-<input id="mypass" value="wcejmcyzhjvftzxw" placeholder="e.g. abcd efgh ijkl mnop -> paste without spaces">
-
-<label style="margin-top:12px;display:block">Email Subject:</label>
-<input id="subj" value="GolViral Daily Earning Update">
-
-<label style="margin-top:12px;display:block">Ad Message (This goes TO customer - Edit it):</label>
-<textarea id="ad" style="height:130px">Hello!
-
-This is GolViral Team. New tasks are live - Earn up to N500 per task.
-
-Watch Reels, Post Memes, Get paid via Bank & USDT.
-
-Login now: https://your-golviral-link.com
-
-Thanks!</textarea>
-
-<label style="margin-top:12px;display:block">Paste 85 Emails - One per line:</label>
-<textarea id="emails" style="height:160px" placeholder="customer1@gmail.com
-customer2@gmail.com
-customer3@gmail.com"></textarea>
-
-<button onclick="sendBulk()" id="btn" style="margin-top:15px">SEND TO ALL NOW - TO CUSTOMER</button>
-
-<div id="log">Ready... Paste App Password first.</div>
-<p style="font-size:11px;color:#94a3b8;margin-top:10px">Textbelt SMS Key is already inside code: 2d395b21... (hardcoded)</p>
+<input id="mypass" placeholder="Paste 16 letters App Password (no spaces)" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px">
+<input id="subj" value="GolViral Daily Update" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px">
+<textarea id="ad" style="width:100%;height:100px;padding:12px">Hello! GolViral new tasks live. Earn N500. Link: https://your-link.com</textarea>
+<textarea id="emails" placeholder="customer@gmail.com" style="width:100%;height:120px;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px"></textarea>
+<button onclick="sendBulk()" style="width:100%;padding:15px;background:#4f46e5;color:white;border:none;border-radius:8px;font-weight:bold">SEND NOW</button>
+<div id="log" style="margin-top:12px;background:#f1f5f9;padding:10px;border-radius:8px;font-size:12px;color:black"></div>
 </div>
 
 <script>
-const MY_GMAIL = "Kelvinbackup89@gmail.com";
-const TEXTBELT_KEY = "2d395b21149d9a0de4e27e36945a85609457cc4awsAnlwnEv2dfsVDHDsbEV5ixj";
-
+const MY_GMAIL="Kelvinbackup89@gmail.com";
 function sendBulk(){
-  const mypass = document.getElementById('mypass').value.trim().replace(/\s/g,'');
-  const subj = document.getElementById('subj').value;
-  const ad = document.getElementById('ad').value;
-  const emails = document.getElementById('emails').value.split('\n').map(e=>e.trim()).filter(e=>e.includes('@'));
-  
-  if(mypass.includes('PASTE_YOUR') || mypass.length < 16){
-    alert('STOP: You must replace PASTE_YOUR_16_LETTERS_HERE_NO_SPACES with your real 16 letters from Google.\n\nLink: https://myaccount.google.com/apppasswords');
-    return;
-  }
-  if(emails.length==0){ alert('Paste at least 1 email'); return; }
-  
-  const btn = document.getElementById('btn');
-  const log = document.getElementById('log');
-  btn.disabled=true;
-  btn.textContent = `Sending 0/${emails.length}...`;
-  log.innerHTML = `Starting...<br>From: ${MY_GMAIL}<br>To: ${emails.length} customers<br><br>`;
-  
-  emails.forEach((to, i)=>{
-    setTimeout(()=>{
-      Email.send({
-        Host: "smtp.gmail.com",
-        Username: MY_GMAIL,
-        Password: mypass,
-        To: to,
-        From: MY_GMAIL,
-        Subject: subj,
-        Body: ad.replace(/\n/g, '<br>')
-      }).then(msg=>{
-        log.innerHTML += `${i+1}. ${to} -> ${msg}<br>`;
-        btn.textContent = `Sending ${i+1}/${emails.length}...`;
-        log.scrollTop = log.scrollHeight;
-        if(i==emails.length-1){
-          btn.disabled=false;
-          btn.textContent = `DONE - Sent ${emails.length} emails`;
-          alert(`Done! Sent to ${emails.length} customers.\n\nYou have ${500-emails.length} left today out of 500.`);
-        }
-      }).catch(e=>{
-        log.innerHTML += `${i+1}. ${to} -> FAILED: ${e}<br>`;
-      });
-    }, i*2500);
-  });
+ if(typeof Email==="undefined"){ alert("Email lib not loaded. Turn on data/WiFi and reload page. If on Airtel, use VPN."); return; }
+ const mypass=document.getElementById('mypass').value.trim().replace(/\s/g,'');
+ const subj=document.getElementById('subj').value;
+ const ad=document.getElementById('ad').value;
+ const emails=document.getElementById('emails').value.split('\n').map(e=>e.trim()).filter(e=>e.includes('@'));
+ if(mypass.length<16){ alert("Paste App Password"); return; }
+ document.getElementById('log').innerHTML="Sending...<br>";
+ emails.forEach((to,i)=>{
+  setTimeout(()=>{
+   Email.send({Host:"smtp.gmail.com",Username:MY_GMAIL,Password:mypass,To:to,From:MY_GMAIL,Subject:subj,Body:ad}).then(msg=>{
+    document.getElementById('log').innerHTML+=`${i+1}. ${to} -> ${msg}<br>`;
+   });
+  },i*2500);
+ });
 }
 </script>
 </body>
